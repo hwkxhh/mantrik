@@ -2076,7 +2076,7 @@ header.header-sticky {
   font-weight: 550;
   position: relative;
   width: 100%;
-  pointer-events: none;
+  pointer-events: auto;
   overflow: hidden;
   font-size: 40px;
   line-height: 53px;
@@ -2112,8 +2112,12 @@ header.header-sticky {
   z-index: 2;
 }
 
+.mb-menu-link {
+  color: var(--brand);
+}
+
 .mb-menu-link .text {
-  color: var(--white);
+  color: var(--brand);
   -webkit-transition: all 0.3s ease;
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
@@ -2138,7 +2142,7 @@ header.header-sticky {
 }
 
 .nav-ul-mb li {
-  text-align: end;
+  text-align: start;
 }
 
 .nav-ul-mb .has-sub-menu {
@@ -5827,8 +5831,8 @@ button.animate-btn::after,
 }
 
 .featured-works-item:hover .image .view-project {
-  opacity: 1;
-  visibility: visible;
+  opacity: 0;
+  visibility: hidden;
 }
 
 @media (max-width: 1199px) {
