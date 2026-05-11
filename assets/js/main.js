@@ -200,17 +200,43 @@
             $(".choose-item").removeClass("active").eq(index).addClass("active");
         }
     };
+    /* Active nav link
+    -------------------------------------------------------------------------*/
+    var setActiveNavLink = () => {
+        var page = window.location.pathname.split("/").pop() || "index.html";
+        $(".nav-menu-main .item-link").each(function () {
+            var href = $(this).attr("href");
+            if (href === page) {
+                $(this).addClass("active");
+            }
+        });
+        $(".nav-ul-mb .mb-menu-link").each(function () {
+            var href = $(this).attr("href");
+            if (href === page) {
+                $(this).addClass("active");
+            }
+        });
+    };
+
     /* Open Menu
     -------------------------------------------------------------------------*/
     var openMbMenu = () => {
         $(".open-mb-menu").on("click", function () {
             $(".offcanvas-menu").addClass("show");
-            $("body").toggleClass("overflow-hidden");
+            $("body").addClass("overflow-hidden");
         });
 
         $(".close-mb-menu").on("click", function () {
             $(".offcanvas-menu").removeClass("show");
-            $("body").toggleClass("overflow-hidden");
+            $("body").removeClass("overflow-hidden");
+        });
+
+        /* Close on backdrop click (outside the panel) */
+        $(".offcanvas-menu").on("click", function (e) {
+            if (!$(e.target).closest(".mb-container").length) {
+                $(this).removeClass("show");
+                $("body").removeClass("overflow-hidden");
+            }
         });
     };
     /* switchprice
@@ -328,6 +354,7 @@
         cursorTrail();
         goTop();
         settingColor();
+        setActiveNavLink();
         openMbMenu();
         switchPrice();
         services_btn();
