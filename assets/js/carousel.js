@@ -148,14 +148,16 @@ window.initSwipers = function() {
             spaceBetween: 0,
             slidesPerView: 1,
             effect: "fade",
-            fadeEffect: {
-                crossFade: true
-            },
+            fadeEffect: { crossFade: true },
+            allowTouchMove: true,
+            grabCursor: true,
         });
         var testimonialSlider = new Swiper('.swiper-testimonial', {
             spaceBetween: 30,
             speed: 500,
             slidesPerView: 1,
+            allowTouchMove: true,
+            grabCursor: true,
             navigation: {
                 nextEl: ".testimonials-next",
                 prevEl: ".testimonials-prev",
@@ -167,6 +169,17 @@ window.initSwipers = function() {
             thumbs: {
                 swiper: sliderMain,
             },
+        });
+
+        /* Sync: image swipe → text + pagination follow */
+        sliderMain.on('slideChange', function () {
+            testimonialSlider.slideTo(sliderMain.activeIndex);
+        });
+
+        /* Sync: text swipe → image follows (thumbs already handles this,
+           but keep explicit for safety) */
+        testimonialSlider.on('slideChange', function () {
+            sliderMain.slideTo(testimonialSlider.activeIndex);
         });
     }
 
